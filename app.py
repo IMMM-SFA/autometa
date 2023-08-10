@@ -20,18 +20,6 @@ st.write(
     unsafe_allow_html=True,
 )
 
-if "author_list" not in st.session_state:
-    st.session_state.author_list = []
-
-if "rerun" not in st.session_state:
-    st.session_state.rerun = False
-
-
-# We want our variable assignments to persist while a user session is active
-# so we use the following method to do so and give it an initial value
-if "my_variable" not in st.session_state:
-    st.session_state.my_variable = None 
-
 # page title
 st.title("Build your meta-repository document")
 
@@ -97,37 +85,28 @@ with st.form("content"):
         """
     )
 
-    # entry box for number
-    n_authors = st.number_input(
-        label="**Number of authors**", 
-        value=0
+    # entry box for authors
+    authors = st.text_input(
+        label="**Author List**", 
+        placeholder="Human Being, Pacific Northwest National Laboratory"
     )
 
-    if st.session_state.rerun == True:
-        st.session_state.rerun = False
-        st.experimental_rerun()
+    # provide an abstract
+    st.markdown(
+        """
+        ### Abstract:
+        Provide an abstract or summary of your research.
+        """
+    )
 
-    else:
-        author = st.text_input(
-            "Enter Author Name:", 
-            value="", 
-            placeholder= "I.M. Human"
-        )
-
-        affiliation = st.text_input(
-            "Enter Author Affiliation:",
-            value="",
-            placeholder="Pacific Northwest National Laboratory, Richland, WA 99354"
-        )
-
-        if st.button('Add Author'):
-            if author != "" and affiliation != "":
-                st.session_state.author_list.append(f"{author}, {affiliation}")
-
-    list_authors()
+    # entry box for authors
+    abstract = st.text_input(
+        label="**Abstract**", 
+        placeholder=""
+    )
 
     # submit button for form
-    submitted = st.form_submit_button("Submit")
+    submitted = st.form_submit_button("Generate Document")
 
     # generate the preview on click
     if submitted:
@@ -136,6 +115,11 @@ with st.form("content"):
         # {repo_name}
 
         **{title}**
+
+        {authors}
+
+        ## Abstract
+        {abstract}
 
         """
 
