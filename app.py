@@ -21,7 +21,7 @@ st.write(
 )
 
 # page title
-st.title("Build YOURRR meta-repository document")
+st.title("Build your meta-repository document")
 
 # description under title
 st.markdown(
@@ -105,6 +105,21 @@ with st.form("content"):
         placeholder=""
     )
 
+    # provide an Journal
+    st.markdown(
+        """
+        ### Journal Entry:
+        Provide a journal citation for your research.
+        """
+    )
+
+    # entry box for authors
+    journal = st.text_input(
+        label="**Journal**", 
+        placeholder=""
+    )
+
+
     # submit button for form
     submitted = st.form_submit_button("Generate Document")
 
@@ -121,6 +136,8 @@ with st.form("content"):
         ## Abstract
         {abstract}
 
+        ## Journal reference
+        {journal}
         """
 
         st.markdown("### Document Preview:")
