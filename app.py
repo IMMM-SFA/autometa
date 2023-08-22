@@ -133,6 +133,30 @@ with st.form("content"):
         placeholder=""
     )
 
+ # provide an data input
+    st.markdown(
+        """
+        ### Data references:
+        Provide a Data for your research.
+        """
+    )
+
+    st.markdown(
+        """
+        ## Data references:
+        Provide input data for your research.
+        """
+    )
+
+    # entry box for authors, to put the input data!
+    input = st.text_input(
+        label="**input data**", 
+        placeholder="| dataset | link | DOI |"
+    )
+
+
+
+
     # submit button for form
     submitted = st.form_submit_button("Generate Document")
 
@@ -154,6 +178,12 @@ with st.form("content"):
 
         ## Code reference
         {code}
+
+        ##Data references
+
+        ### Input data
+        |       Dataset       |                                   Repository Link                                    |               DOI                |
+        |:-------------------:|:------------------------------------------------------------------------------------:|:--------------------------------:|
         """
 
         st.markdown("### Document Preview:")
