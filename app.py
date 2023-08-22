@@ -179,7 +179,7 @@ with st.form("content"):
         ## Code reference
         {code}
 
-        ##Data references
+        ## Data references
 
         ### Input data
         |       Dataset       |                                   Repository Link                                    |               DOI                |
