@@ -149,9 +149,19 @@ with st.form("content"):
     )
 
     # entry box for authors, to put the input data!
-    input = st.text_input(
-        label="**input data**", 
-        placeholder="| dataset | link | DOI |"
+    dataset = st.text_input(
+        label="**dataset**", 
+        placeholder="dataset"
+    )
+
+    linkreference = st.text_input(
+        label="**linkreference**", 
+        placeholder="link"
+    )
+
+    DOI = st.text_input(
+        label="**DOI**", 
+        placeholder="DOI"
     )
 
 
@@ -184,6 +194,7 @@ with st.form("content"):
         ### Input data
         |       Dataset       |                                   Repository Link                                    |               DOI                |
         |:-------------------:|:------------------------------------------------------------------------------------:|:--------------------------------:|
+        |{dataset} | {linkreference} | {DOI} |
         """
 
         st.markdown("### Document Preview:")
