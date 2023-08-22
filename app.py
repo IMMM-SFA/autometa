@@ -119,6 +119,19 @@ with st.form("content"):
         placeholder=""
     )
 
+    # provide an code reference
+    st.markdown(
+        """
+        ### Code Reference:
+        Provide a code reference for your research.
+        """
+    )
+
+    # entry box for authors, to put the code reference!
+    code = st.text_input(
+        label="**Code**", 
+        placeholder=""
+    )
 
     # submit button for form
     submitted = st.form_submit_button("Generate Document")
@@ -138,6 +151,9 @@ with st.form("content"):
 
         ## Journal reference
         {journal}
+
+        ## Code reference
+        {code}
         """
 
         st.markdown("### Document Preview:")
