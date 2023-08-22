@@ -150,20 +150,41 @@ with st.form("content"):
 
     # entry box for authors, to put the input data!
     dataset = st.text_input(
-        label="**dataset**", 
-        placeholder="dataset"
+        label="**input data set**", 
+        placeholder="input dataset"
     )
 
     linkreference = st.text_input(
-        label="**linkreference**", 
-        placeholder="link"
+        label="**input link reference**", 
+        placeholder="input link"
     )
 
     DOI = st.text_input(
-        label="**DOI**", 
-        placeholder="DOI"
+        label="**input DOI**", 
+        placeholder="input DOI"
     )
 
+    st.markdown(
+        """
+        Provide output data for your research.
+        """
+    )
+
+     # entry box for authors, to put the output data!
+    datasetOutput = st.text_input(
+        label="**output data set**", 
+        placeholder="output dataset"
+    )
+
+    linkreferenceOutput = st.text_input(
+        label="**output link reference**", 
+        placeholder="output link"
+    )
+
+    DOIOutput = st.text_input(
+        label="**output DOI**", 
+        placeholder="output DOI"
+    )
 
 
 
@@ -195,8 +216,13 @@ with st.form("content"):
         |       Dataset       |                                   Repository Link                                    |               DOI                |
         |:-------------------:|:------------------------------------------------------------------------------------:|:--------------------------------:|
         |{dataset} | {linkreference} | {DOI} |
-        """
-
+        
+        ### Output data
+        |       Dataset       |                                   Repository Link                                    |               DOI                |
+        |:-------------------:|:------------------------------------------------------------------------------------:|:--------------------------------:|
+        |{datasetOutput} | {linkreferenceOutput} | {DOIOutput} |
+        """  
+        
         st.markdown("### Document Preview:")
         st.success(document)
 
