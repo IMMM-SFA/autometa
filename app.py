@@ -144,7 +144,7 @@ with st.form("content"):
     st.markdown(
         """
         ## Data references:
-        Provide input data for your research.
+        Reference for each minted data source for your input data.
         """
     )
 
@@ -166,7 +166,7 @@ with st.form("content"):
 
     st.markdown(
         """
-        Provide output data for your research.
+        Reference for each minted data source for your output data.
         """
     )
 
@@ -185,6 +185,22 @@ with st.form("content"):
         label="**output DOI**", 
         placeholder="output DOI"
     )
+
+
+    st.markdown(
+        """
+        ### Contributing modeling software
+        What software did you use in your work?
+        """
+    )
+
+    contributions = st.text_input(
+        label="**contributions**", 
+        placeholder="model, version, link, DOI"
+    )
+
+    
+
 
 
 
