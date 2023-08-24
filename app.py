@@ -199,12 +199,7 @@ with st.form("content"):
         placeholder="model, version, link, DOI"
     )
 
-    modelsList = contributions.split(",")
-
-    model = modelsList[0]
-    modelversion = modelsList[1]
-    modelLink = modelsList[2]
-    modelDOI = modelsList[3]
+    
 
 
     # submit button for form
@@ -212,7 +207,13 @@ with st.form("content"):
 
     # generate the preview on click
     if submitted:
+        modelsList = contributions.split(",")
 
+        model = modelsList[0]
+        modelversion = modelsList[1]
+        modelLink = modelsList[2]
+        modelDOI = modelsList[3]
+        
         document = f"""
         # {repo_name}
 
@@ -242,7 +243,6 @@ with st.form("content"):
         |{datasetOutput} | {linkreferenceOutput} | {DOIOutput} |
         
         ### Contributing models
-        {model}
 
         """  
         
