@@ -213,8 +213,20 @@ with st.form("content"):
         placeholder="script name, description, how to run"
     )
 
+    st.markdown(
+        """
+        ### Reproduce my figures
+        Use the scripts found in the `figures` directory to
+        reproduce the figures used in this publication.
+        """
+    )
 
-    
+    figures = st.text_input(
+        label="**figures**", 
+        placeholder="script name, description, how to run"
+    )
+
+
 
 
     # submit button for form
@@ -245,6 +257,17 @@ with st.form("content"):
             scriptName = ""
             description = ""
             run = ""
+
+        figList = figures.split(",")   
+        if(len(figList) > 2):
+            figscriptName = figList[0]
+            figdescription = figList[1]
+            figrun = figList[2]
+        else:
+            figscriptName = ""
+            figdescription = ""
+            figrun = ""
+
         
         document = f"""
         # {repo_name}
@@ -279,10 +302,18 @@ with st.form("content"):
         |-------|---------|-----------------|-----|
         | {model} | {modelversion} | {modelLink} | {modelDOI} |
 
-        ###Reproduce my experiment
+        ### Reproduce my experiment
         | Script Name | Description | How to Run |
         | --- | --- | --- |
         | {scriptName} |  {description} | {run} |
+
+
+        ### Reproduce my figures
+        | Script Name | Description | How to Run |
+        | --- | --- | --- |
+        | {figscriptName} |  {figdescription} | {figrun} |
+
+
 
         """  
         
