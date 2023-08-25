@@ -224,19 +224,28 @@ with st.form("content"):
     if submitted:
 
         modelsList = contributions.split(",")
-        
+
         if(len(modelsList) > 3):
             model = modelsList[0]
             modelversion = modelsList[1]
             modelLink = modelsList[2]
             modelDOI = modelsList[3]
+        else:
+            model = ""
+            modelversion = ""
+            modelLink = ""
+            modelDOI = ""
 
         expList = experiment.split(",")   
         if(len(expList) > 2):
             scriptName = expList[0]
             description = expList[1]
             run = expList[2]
-
+        else:
+            scriptName = ""
+            description = ""
+            run = ""
+        
         document = f"""
         # {repo_name}
 
