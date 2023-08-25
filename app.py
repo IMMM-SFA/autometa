@@ -199,6 +199,21 @@ with st.form("content"):
         placeholder="model, version, link, DOI"
     )
 
+    st.markdown(
+        """
+        ### Reproduce my experiment
+        Fill in detailed info here or link to other documentation 
+        that is a thorough walkthrough of how to use what is in 
+        this repository to reproduce your experiment        
+        """
+    )
+
+    experiment = st.text_input(
+        label="**experiment**", 
+        placeholder="script name, description, how to run"
+    )
+
+
     
 
 
@@ -208,11 +223,15 @@ with st.form("content"):
     # generate the preview on click
     if submitted:
         modelsList = contributions.split(",")
-
         model = modelsList[0]
         modelversion = modelsList[1]
         modelLink = modelsList[2]
         modelDOI = modelsList[3]
+
+        expList = experiment.split(",")
+        scriptName = expList[0]
+        description = expList[1]
+        run = expList[2]
 
         document = f"""
         # {repo_name}
@@ -246,6 +265,12 @@ with st.form("content"):
         | Model | Version | Repository Link | DOI |
         |-------|---------|-----------------|-----|
         | {model} | {modelversion} | {modelLink} | {modelDOI} |
+
+        ###Reproduce my experiment
+        | Script Name | Description | How to Run |
+        | --- | --- | --- |
+        | {scriptName} |  {description} | {run} |
+
         """  
         
         st.markdown("### Document Preview:")
