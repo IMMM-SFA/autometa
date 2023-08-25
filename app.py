@@ -222,16 +222,20 @@ with st.form("content"):
 
     # generate the preview on click
     if submitted:
-        modelsList = contributions.split(",")
-        model = modelsList[0]
-        modelversion = modelsList[1]
-        modelLink = modelsList[2]
-        modelDOI = modelsList[3]
 
-        expList = experiment.split(",")
-        scriptName = expList[0]
-        description = expList[1]
-        run = expList[2]
+        modelsList = contributions.split(",")
+        
+        if(len(modelsList) > 3):
+            model = modelsList[0]
+            modelversion = modelsList[1]
+            modelLink = modelsList[2]
+            modelDOI = modelsList[3]
+
+        expList = experiment.split(",")   
+        if(len(expList) > 2):
+            scriptName = expList[0]
+            description = expList[1]
+            run = expList[2]
 
         document = f"""
         # {repo_name}
