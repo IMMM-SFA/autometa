@@ -213,7 +213,7 @@ with st.form("content"):
         modelversion = modelsList[1]
         modelLink = modelsList[2]
         modelDOI = modelsList[3]
-        
+
         document = f"""
         # {repo_name}
 
@@ -243,7 +243,9 @@ with st.form("content"):
         |{datasetOutput} | {linkreferenceOutput} | {DOIOutput} |
         
         ### Contributing models
-
+        | Model | Version | Repository Link | DOI |
+        |-------|---------|-----------------|-----|
+        | {model} | {modelversion} | {modelLink} | {modelDOI} |
         """  
         
         st.markdown("### Document Preview:")
