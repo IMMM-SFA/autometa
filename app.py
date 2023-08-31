@@ -144,7 +144,7 @@ with st.form("content"):
     st.markdown(
         """
         ## Data references:
-        Provide input data for your research.
+        Reference for each minted data source for your input data.
         """
     )
 
@@ -166,7 +166,7 @@ with st.form("content"):
 
     st.markdown(
         """
-        Provide output data for your research.
+        Reference for each minted data source for your output data.
         """
     )
 
@@ -187,6 +187,47 @@ with st.form("content"):
     )
 
 
+    st.markdown(
+        """
+        ### Contributing modeling software
+        What software did you use in your work?
+        """
+    )
+
+    contributions = st.text_input(
+        label="**contributions**", 
+        placeholder="model, version, link, DOI"
+    )
+
+    st.markdown(
+        """
+        ### Reproduce my experiment
+        Fill in detailed info here or link to other documentation 
+        that is a thorough walkthrough of how to use what is in 
+        this repository to reproduce your experiment        
+        """
+    )
+
+    experiment = st.text_input(
+        label="**experiment**", 
+        placeholder="script name, description, how to run"
+    )
+
+    st.markdown(
+        """
+        ### Reproduce my figures
+        Use the scripts found in the `figures` directory to
+        reproduce the figures used in this publication.
+        """
+    )
+
+    figures = st.text_input(
+        label="**figures**", 
+        placeholder="script name, description, how to run"
+    )
+
+
+
 
     # submit button for form
     submitted = st.form_submit_button("Generate Document")
@@ -194,6 +235,40 @@ with st.form("content"):
     # generate the preview on click
     if submitted:
 
+        modelsList = contributions.split(",")
+
+        if(len(modelsList) > 3):
+            model = modelsList[0]
+            modelversion = modelsList[1]
+            modelLink = modelsList[2]
+            modelDOI = modelsList[3]
+        else:
+            model = ""
+            modelversion = ""
+            modelLink = ""
+            modelDOI = ""
+
+        expList = experiment.split(",")   
+        if(len(expList) > 2):
+            scriptName = expList[0]
+            description = expList[1]
+            run = expList[2]
+        else:
+            scriptName = ""
+            description = ""
+            run = ""
+
+        figList = figures.split(",")   
+        if(len(figList) > 2):
+            figscriptName = figList[0]
+            figdescription = figList[1]
+            figrun = figList[2]
+        else:
+            figscriptName = ""
+            figdescription = ""
+            figrun = ""
+
+        
         document = f"""
         # {repo_name}
 
@@ -221,6 +296,25 @@ with st.form("content"):
         |       Dataset       |                                   Repository Link                                    |               DOI                |
         |:-------------------:|:------------------------------------------------------------------------------------:|:--------------------------------:|
         |{datasetOutput} | {linkreferenceOutput} | {DOIOutput} |
+        
+        ### Contributing models
+        | Model | Version | Repository Link | DOI |
+        |-------|---------|-----------------|-----|
+        | {model} | {modelversion} | {modelLink} | {modelDOI} |
+
+        ### Reproduce my experiment
+        | Script Name | Description | How to Run |
+        | --- | --- | --- |
+        | {scriptName} |  {description} | {run} |
+
+
+        ### Reproduce my figures
+        | Script Name | Description | How to Run |
+        | --- | --- | --- |
+        | {figscriptName} |  {figdescription} | {figrun} |
+
+
+
         """  
         
         st.markdown("### Document Preview:")
