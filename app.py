@@ -119,6 +119,115 @@ with st.form("content"):
         placeholder=""
     )
 
+    # provide an code reference
+    st.markdown(
+        """
+        ### Code Reference:
+        Provide a code reference for your research.
+        """
+    )
+
+    # entry box for authors, to put the code reference!
+    code = st.text_input(
+        label="**Code**", 
+        placeholder=""
+    )
+
+ # provide an data input
+    st.markdown(
+        """
+        ### Data references:
+        Provide a Data for your research.
+        """
+    )
+
+    st.markdown(
+        """
+        ## Data references:
+        Reference for each minted data source for your input data.
+        """
+    )
+
+    # entry box for authors, to put the input data!
+    dataset = st.text_input(
+        label="**input data set**", 
+        placeholder="input dataset"
+    )
+
+    linkreference = st.text_input(
+        label="**input link reference**", 
+        placeholder="input link"
+    )
+
+    DOI = st.text_input(
+        label="**input DOI**", 
+        placeholder="input DOI"
+    )
+
+    st.markdown(
+        """
+        Reference for each minted data source for your output data.
+        """
+    )
+
+     # entry box for authors, to put the output data!
+    datasetOutput = st.text_input(
+        label="**output data set**", 
+        placeholder="output dataset"
+    )
+
+    linkreferenceOutput = st.text_input(
+        label="**output link reference**", 
+        placeholder="output link"
+    )
+
+    DOIOutput = st.text_input(
+        label="**output DOI**", 
+        placeholder="output DOI"
+    )
+
+
+    st.markdown(
+        """
+        ### Contributing modeling software
+        What software did you use in your work?
+        """
+    )
+
+    contributions = st.text_input(
+        label="**contributions**", 
+        placeholder="model, version, link, DOI"
+    )
+
+    st.markdown(
+        """
+        ### Reproduce my experiment
+        Fill in detailed info here or link to other documentation 
+        that is a thorough walkthrough of how to use what is in 
+        this repository to reproduce your experiment        
+        """
+    )
+
+    experiment = st.text_input(
+        label="**experiment**", 
+        placeholder="script name, description, how to run"
+    )
+
+    st.markdown(
+        """
+        ### Reproduce my figures
+        Use the scripts found in the `figures` directory to
+        reproduce the figures used in this publication.
+        """
+    )
+
+    figures = st.text_input(
+        label="**figures**", 
+        placeholder="script name, description, how to run"
+    )
+
+
+
 
     # submit button for form
     submitted = st.form_submit_button("Generate Document")
@@ -126,6 +235,40 @@ with st.form("content"):
     # generate the preview on click
     if submitted:
 
+        modelsList = contributions.split(",")
+
+        if(len(modelsList) > 3):
+            model = modelsList[0]
+            modelversion = modelsList[1]
+            modelLink = modelsList[2]
+            modelDOI = modelsList[3]
+        else:
+            model = ""
+            modelversion = ""
+            modelLink = ""
+            modelDOI = ""
+
+        expList = experiment.split(",")   
+        if(len(expList) > 2):
+            scriptName = expList[0]
+            description = expList[1]
+            run = expList[2]
+        else:
+            scriptName = ""
+            description = ""
+            run = ""
+
+        figList = figures.split(",")   
+        if(len(figList) > 2):
+            figscriptName = figList[0]
+            figdescription = figList[1]
+            figrun = figList[2]
+        else:
+            figscriptName = ""
+            figdescription = ""
+            figrun = ""
+
+        
         document = f"""
         # {repo_name}
 
@@ -138,8 +281,42 @@ with st.form("content"):
 
         ## Journal reference
         {journal}
-        """
 
+        ## Code reference
+        {code}
+
+        ## Data references
+
+        ### Input data
+        |       Dataset       |                                   Repository Link                                    |               DOI                |
+        |:-------------------:|:------------------------------------------------------------------------------------:|:--------------------------------:|
+        |{dataset} | {linkreference} | {DOI} |
+        
+        ### Output data
+        |       Dataset       |                                   Repository Link                                    |               DOI                |
+        |:-------------------:|:------------------------------------------------------------------------------------:|:--------------------------------:|
+        |{datasetOutput} | {linkreferenceOutput} | {DOIOutput} |
+        
+        ### Contributing models
+        | Model | Version | Repository Link | DOI |
+        |-------|---------|-----------------|-----|
+        | {model} | {modelversion} | {modelLink} | {modelDOI} |
+
+        ### Reproduce my experiment
+        | Script Name | Description | How to Run |
+        | --- | --- | --- |
+        | {scriptName} |  {description} | {run} |
+
+
+        ### Reproduce my figures
+        | Script Name | Description | How to Run |
+        | --- | --- | --- |
+        | {figscriptName} |  {figdescription} | {figrun} |
+
+
+
+        """  
+        
         st.markdown("### Document Preview:")
         st.success(document)
 
