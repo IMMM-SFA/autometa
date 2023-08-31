@@ -280,7 +280,7 @@ with st.form("content"):
         suppList = supp.split(",")
         formated = ""
         for i in range(len(suppList)):
-            formated = formated + "/n" +suppList[i] 
+            formated = formated + "\n " +suppList[i] 
         
         document = f"""
         # {repo_name}
