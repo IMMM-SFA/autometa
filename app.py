@@ -280,7 +280,7 @@ with st.form("content"):
         suppList = supp.split(",")
         formated = ""
         for i in range(len(suppList)):
-            formatted = formatted + "/n" +suppList[i] 
+            formated = formated + "/n" +suppList[i] 
         
         document = f"""
         # {repo_name}
@@ -327,7 +327,7 @@ with st.form("content"):
         | {figscriptName} |  {figdescription} | {figrun} |
 
         ### Reproduce my experiment
-        {formatted}
+        {formated}
 
 
         """  
