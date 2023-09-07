@@ -227,18 +227,17 @@ with st.form("content"):
         placeholder="script name, description, how to run"
     )
 
-    if 'count' not in st.session_state:
-	    st.session_state.count = 0
+    st.markdown(
+        """
+        ### Supplementary Figures
+        What else did you use in your figure?
+        """
+    )
 
-    def add_new_row():
-        st.text_input("Please input something",key=random.choice(string.ascii_uppercase)+str(random.randint(0,999999)))
-
-    if st.button("Add new row"):
-        st.session_state.count += 1
-        add_new_row()
-        if st.session_state.count>1:
-            for i in range(st.session_state.count-1):
-                add_new_row()
+    supp = st.text_input(
+        label="**supp**", 
+        placeholder="link1, link2, link3"
+    )
 
 
     # submit button for form
@@ -246,6 +245,11 @@ with st.form("content"):
 
     # generate the preview on click
     if submitted:
+
+        suppList = supp.split(",")                
+        if(len(suppList) < 7):
+            for i in range(len(suppList) + 1, 8):
+                suppList.append("")
 
         modelsList = contributions.split(",")
 
@@ -317,13 +321,20 @@ with st.form("content"):
         | Script Name | Description | How to Run |
         | --- | --- | --- |
         | {scriptName} |  {description} | {run} |
-        {extra}
 
         ### Reproduce my figures
         | Script Name | Description | How to Run |
         | --- | --- | --- |
         | {figscriptName} |  {figdescription} | {figrun} |
 
+        ### Supplementary figures
+        {suppList[0]}
+        {suppList[1]}
+        {suppList[2]}
+        {suppList[3]}
+        {suppList[4]}
+        {suppList[5]}
+        {suppList[6]}
 
         """  
         
