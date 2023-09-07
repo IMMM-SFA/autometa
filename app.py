@@ -226,16 +226,6 @@ with st.form("content"):
         placeholder="script name, description, how to run"
     )
 
-    st.markdown(
-        """
-        ### Supplementary figures
-        Whatever else you think should be added to the metarepo!.
-        """
-    )
-    supp = st.text_input(
-        label="**supp**", 
-        placeholder="link 1, link 2, link 3, etc"
-    )
 
 
     # submit button for form
