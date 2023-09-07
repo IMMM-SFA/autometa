@@ -328,13 +328,13 @@ with st.form("content"):
         | {figscriptName} |  {figdescription} | {figrun} |
 
         ### Supplementary figures
-        {suppList[0]}
-        {suppList[1]}
-        {suppList[2]}
-        {suppList[3]}
-        {suppList[4]}
-        {suppList[5]}
-        {suppList[6]}
+        {suppList[0]} \n
+        {suppList[1]} \n
+        {suppList[2]} \n
+        {suppList[3]} \n
+        {suppList[4]} \n
+        {suppList[5]} \n
+        {suppList[6]} \n
 
         """  
         
