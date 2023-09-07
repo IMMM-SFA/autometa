@@ -1,7 +1,8 @@
 
 import streamlit as st
 from datetime import datetime as dt
-
+import random
+import string
 
 def list_authors():
     for index, entry in enumerate(st.session_state.author_list, start=1):
@@ -226,7 +227,19 @@ with st.form("content"):
         placeholder="script name, description, how to run"
     )
 
-    extra = {figures | experiment | figures}
+    if 'count' not in st.session_state:
+	    st.session_state.count = 0
+
+    def add_new_row():
+        st.text_input("Please input something",key=random.choice(string.ascii_uppercase)+str(random.randint(0,999999)))
+
+    if st.button("Add new row"):
+        st.session_state.count += 1
+        add_new_row()
+        if st.session_state.count>1:
+            for i in range(st.session_state.count-1):
+                add_new_row()
+
 
     # submit button for form
     submitted = st.form_submit_button("Generate Document")
