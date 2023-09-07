@@ -226,7 +226,7 @@ with st.form("content"):
         placeholder="script name, description, how to run"
     )
 
-
+    extra = {figures | experiment | figures}
 
     # submit button for form
     submitted = st.form_submit_button("Generate Document")
@@ -266,11 +266,6 @@ with st.form("content"):
             figscriptName = ""
             figdescription = ""
             figrun = ""
-
-        suppList = supp.split(",")
-        formated = ""
-        for i in range(len(suppList)):
-            formated = formated + "\n " + suppList[i] 
         
         document = f"""
         # {repo_name}
@@ -309,7 +304,7 @@ with st.form("content"):
         | Script Name | Description | How to Run |
         | --- | --- | --- |
         | {scriptName} |  {description} | {run} |
-
+        {extra}
 
         ### Reproduce my figures
         | Script Name | Description | How to Run |
