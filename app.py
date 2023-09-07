@@ -1,7 +1,8 @@
 
 import streamlit as st
 from datetime import datetime as dt
-
+import random
+import string
 
 def list_authors():
     for index, entry in enumerate(st.session_state.author_list, start=1):
@@ -226,7 +227,17 @@ with st.form("content"):
         placeholder="script name, description, how to run"
     )
 
+    st.markdown(
+        """
+        ### Supplementary Figures
+        What else did you use in your figure?
+        """
+    )
 
+    supp = st.text_input(
+        label="**supp**", 
+        placeholder="link1, link2, link3"
+    )
 
 
     # submit button for form
@@ -234,6 +245,11 @@ with st.form("content"):
 
     # generate the preview on click
     if submitted:
+
+        suppList = supp.split(",")                
+        if(len(suppList) < 7):
+            for i in range(len(suppList) + 1, 8):
+                suppList.append("")
 
         modelsList = contributions.split(",")
 
@@ -267,7 +283,6 @@ with st.form("content"):
             figscriptName = ""
             figdescription = ""
             figrun = ""
-
         
         document = f"""
         # {repo_name}
@@ -307,13 +322,19 @@ with st.form("content"):
         | --- | --- | --- |
         | {scriptName} |  {description} | {run} |
 
-
         ### Reproduce my figures
         | Script Name | Description | How to Run |
         | --- | --- | --- |
         | {figscriptName} |  {figdescription} | {figrun} |
 
-
+        ### Supplementary figures
+        {suppList[0]} \n
+        {suppList[1]} \n
+        {suppList[2]} \n
+        {suppList[3]} \n
+        {suppList[4]} \n
+        {suppList[5]} \n
+        {suppList[6]} \n
 
         """  
         
