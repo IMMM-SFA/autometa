@@ -22,7 +22,7 @@ st.write(
 )
 
 # page title
-st.title("Build your meta-repository document")
+st.title("Build Your Meta-Repository Document")
 
 # description under title
 st.markdown(
@@ -43,13 +43,10 @@ st.markdown(
 
 # entry form for content sections
 with st.form("content"):
-
-    st.write("Inside the form")
-
     # guidance for meta-repository name
     st.markdown(
         """
-        ### Naming your meta-repository:
+        ### Naming Your Meta-Repository:
 
         The following naming conventions should be used when naming your repository:
         - Single author: **lastname_year_journal**
@@ -67,7 +64,7 @@ with st.form("content"):
     # guidance for publication title
     st.markdown(
         """
-        ### Publication title:
+        ### Publication Title:
         This is usually the title of your publication. 
         """
     )
@@ -81,7 +78,7 @@ with st.form("content"):
     # provide a list of authors
     st.markdown(
         """
-        ### Author list:
+        ### Author List:
         Provide a list of authors. 
         """
     )
@@ -101,7 +98,7 @@ with st.form("content"):
     )
 
     # entry box for authors
-    abstract = st.text_input(
+    abstract = st.text_area(
         label="**Abstract**", 
         placeholder=""
     )
@@ -115,7 +112,7 @@ with st.form("content"):
     )
 
     # entry box for authors
-    journal = st.text_input(
+    journal = st.text_area(
         label="**Journal**", 
         placeholder=""
     )
@@ -129,7 +126,7 @@ with st.form("content"):
     )
 
     # entry box for authors, to put the code reference!
-    code = st.text_input(
+    code = st.text_area(
         label="**Code**", 
         placeholder=""
     )
@@ -137,14 +134,13 @@ with st.form("content"):
  # provide an data input
     st.markdown(
         """
-        ### Data references:
+        ### Data References:
         Provide a Data for your research.
         """
     )
 
     st.markdown(
         """
-        ## Data references:
         Reference for each minted data source for your input data.
         """
     )
@@ -190,7 +186,7 @@ with st.form("content"):
 
     st.markdown(
         """
-        ### Contributing modeling software
+        ### Contributing Modeling Software
         What software did you use in your work?
         """
     )
@@ -202,7 +198,7 @@ with st.form("content"):
 
     st.markdown(
         """
-        ### Reproduce my experiment
+        ### Reproduce my Experiment
         Fill in detailed info here or link to other documentation 
         that is a thorough walkthrough of how to use what is in 
         this repository to reproduce your experiment        
@@ -216,7 +212,7 @@ with st.form("content"):
 
     st.markdown(
         """
-        ### Reproduce my figures
+        ### Reproduce my Figures
         Use the scripts found in the `figures` directory to
         reproduce the figures used in this publication.
         """
@@ -241,12 +237,14 @@ with st.form("content"):
 
 
     # submit button for form
-    submitted = st.form_submit_button("Generate Document")
+    submitted = st.form_submit_button("Generate Document Preview")
 
     # generate the preview on click
     if submitted:
 
-        suppList = supp.split(",")                
+        suppList = supp.split(",") 
+        for i in range(len(suppList)):
+            suppList[i] = "https://" + suppList[i]               
         if(len(suppList) < 7):
             for i in range(len(suppList) + 1, 8):
                 suppList.append("")
@@ -294,40 +292,40 @@ with st.form("content"):
         ## Abstract
         {abstract}
 
-        ## Journal reference
+        ## Journal Reference
         {journal}
 
-        ## Code reference
+        ## Code Reference
         {code}
 
-        ## Data references
+        ## Data References
 
-        ### Input data
+        ### Input Data
         |       Dataset       |                                   Repository Link                                    |               DOI                |
         |:-------------------:|:------------------------------------------------------------------------------------:|:--------------------------------:|
         |{dataset} | {linkreference} | {DOI} |
         
-        ### Output data
+        ### Output Data
         |       Dataset       |                                   Repository Link                                    |               DOI                |
         |:-------------------:|:------------------------------------------------------------------------------------:|:--------------------------------:|
         |{datasetOutput} | {linkreferenceOutput} | {DOIOutput} |
         
-        ### Contributing models
+        ### Contributing Models
         | Model | Version | Repository Link | DOI |
         |-------|---------|-----------------|-----|
         | {model} | {modelversion} | {modelLink} | {modelDOI} |
 
-        ### Reproduce my experiment
+        ### Reproduce My Experiment
         | Script Name | Description | How to Run |
         | --- | --- | --- |
         | {scriptName} |  {description} | {run} |
 
-        ### Reproduce my figures
+        ### Reproduce My Figures
         | Script Name | Description | How to Run |
         | --- | --- | --- |
         | {figscriptName} |  {figdescription} | {figrun} |
 
-        ### Supplementary figures
+        ### Supplementary Figures
         {suppList[0]} \n
         {suppList[1]} \n
         {suppList[2]} \n
